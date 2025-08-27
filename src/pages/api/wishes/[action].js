@@ -1,7 +1,7 @@
 import { google } from 'googleapis';
 
-// Your Google Sheets configuration
-const SHEET_ID = '1UEyxz8VHGvQJ5K8wX9mNZrL2c3dB4f5g6h7i8j9k0l'; // Replace with your actual Sheet ID
+// Your Google Sheet ID - replace with your actual Sheet ID
+const SHEET_ID = 'YOUR_ACTUAL_SHEET_ID_HERE';
 const CLIENT_EMAIL = 'birthday-wishes-manager@dr-garima-birthday-wishes.iam.gserviceaccount.com';
 const PRIVATE_KEY = `-----BEGIN PRIVATE KEY-----
 MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCo7UpNi0BFott2
@@ -32,7 +32,6 @@ S4sMz6xL7Lsy+GsEyuGRwsQxFCxQhYS9EgTfFMCWY9nuexwcCp7sWLlYDYEIBtYZ
 ksji+1iGcOMWHgPBZPOW9w==
 -----END PRIVATE KEY-----`;
 
-// Create authenticated Google Sheets client
 async function getGoogleSheetsClient() {
   const auth = new google.auth.JWT({
     email: CLIENT_EMAIL,
@@ -43,7 +42,6 @@ async function getGoogleSheetsClient() {
   return google.sheets({ version: 'v4', auth });
 }
 
-// GET: Fetch all wishes from Google Sheets
 export async function GET({ params }) {
   const { action } = params;
   
@@ -59,7 +57,7 @@ export async function GET({ params }) {
     
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SHEET_ID,
-      range: 'Sheet1!A:F', // Timestamp, Name, Message, Status, Admin Notes, Date Approved
+      range: 'Sheet1', // This gets all data from Sheet1
     });
 
     const rows = response.data.values;
@@ -70,16 +68,18 @@ export async function GET({ params }) {
       });
     }
 
-    // Convert rows to wish objects
+    // Convert rows to wish objects - FIXED FORMAT
     const wishes = rows.slice(1).map((row, index) => ({
       rowIndex: index + 2, // +2 because we skip header row and sheets are 1-indexed
-      timestamp: row[0] || '',
-      name: row[1] || 'Anonymous',
-      message: row[2] || '',
-      status: row[3] || 'Pending',
-      adminNotes: row[4] || '',
-      dateApproved: row[5] || ''
+      timestamp: row[0] || '', // Column A
+      name: row[1] || 'Anonymous', // Column B  
+      message: row[2] || '', // Column C
+      status: row[3] || 'Pending', // Column D
+      adminNotes: row[4] || '', // Column E  
+      dateApproved: row[5] || '' // Column F
     }));
+
+    console.log('Fetched wishes:', wishes); // Debug log
 
     return new Response(JSON.stringify(wishes), {
       headers: { 'Content-Type': 'application/json' }
@@ -97,7 +97,6 @@ export async function GET({ params }) {
   }
 }
 
-// POST: Update wish status in Google Sheets
 export async function POST({ params, request }) {
   const { action } = params;
   
@@ -131,11 +130,13 @@ export async function POST({ params, request }) {
       requestBody: {
         values: [[
           status, 
-          `Updated via admin panel by system`,
+          'Updated via admin panel',
           new Date().toISOString()
         ]]
       }
     });
+
+    console.log(`Updated row ${rowIndex} to status: ${status}`);
 
     return new Response(JSON.stringify({ 
       success: true,
@@ -160,7 +161,6 @@ export async function POST({ params, request }) {
   }
 }
 
-// OPTIONS: Handle CORS preflight
 export async function OPTIONS() {
   return new Response(null, {
     status: 200,
