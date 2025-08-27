@@ -156,4 +156,21 @@ const title = "Dr. Garima - Physiotherapy Expert";
         const email = prompt('Enter your email:');
         if (allowedEmails.includes(email)) {
           localStorage.setItem('userEmail', email);
-          alert('✅ Welcome! You now have access to personal pages
+          alert('✅ Welcome! You now have access to personal pages.');
+          location.reload(); // Refresh page to update status
+        } else {
+          alert('❌ Access denied. Contact admin for access.');
+        }
+      }
+      
+      window.logout = function() {
+        localStorage.removeItem('userEmail');
+        location.reload(); // Refresh page to update status
+      }
+      
+      // Update status on page load
+      updateUserStatus();
+    });
+  </script>
+</body>
+</html>
