@@ -1,0 +1,131 @@
+---
+const title = "Memories Gallery - Dr. Garima";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .nav-bar {
+      background: rgba(255,255,255,0.9);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .nav-bar a {
+      color: #6f42c1;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .logout-btn {
+      float: right;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .gallery-hero {
+      text-align: center;
+      background: rgba(255,255,255,0.9);
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+    }
+    .upload-section {
+      background: rgba(255,255,255,0.9);
+      padding: 2rem;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+    }
+    .slideshow-container {
+      background: rgba(255,255,255,0.9);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+    }
+    .access-denied {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div id="memories-content" style="display: none;">
+    <div class="container">
+      <div class="nav-bar">
+        <a href="/home">🎂 Personal Home</a>
+        <a href="/birthday">🎉 Birthday Hub</a>
+        <a href="/wishes">💝 Wishes</a>
+        <a href="/music">🎵 Music</a>
+        <a href="/calendar">📅 Calendar</a>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+        <div style="clear: both;"></div>
+      </div>
+
+      <div class="gallery-hero">
+        <h1>📸 Personal Memories Gallery</h1>
+        <p>Your special moments in a beautiful slideshow</p>
+      </div>
+
+      <div class="upload-section">
+        <h3>📤 Upload New Memories</h3>
+        <input type="file" id="fileInput" accept="image/*,video/*" multiple style="margin: 1rem 0;">
+        <button onclick="uploadFiles()" style="background: #6f42c1; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">Upload</button>
+      </div>
+
+      <div class="slideshow-container">
+        <h2>🎬 Your Memory Slideshow</h2>
+        <div id="slideshow">
+          <p>No memories uploaded yet. Add some photos or videos above!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="access-denied" class="access-denied">
+    <h2>🚫 Access Restricted</h2>
+    <button onclick="window.location.href='/'" style="background: #6f42c1; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer;">Go to Public Home</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const allowedEmails = ['adityagaur0510@gmail.com', 'websitefordr.garima@gmail.com'];
+      const currentUser = localStorage.getItem('userEmail');
+      
+      if (currentUser && allowedEmails.includes(currentUser)) {
+        document.getElementById('memories-content').style.display = 'block';
+        document.getElementById('access-denied').style.display = 'none';
+      } else {
+        document.getElementById('access-denied').style.display = 'block';
+      }
+      
+      window.uploadFiles = function() {
+        const files = document.getElementById('fileInput').files;
+        // File upload logic will be added later
+        alert('File upload feature will be implemented with cloud storage!');
+      }
+      
+      window.logout = function() {
+        localStorage.removeItem('userEmail');
+        window.location.href = '/';
+      }
+    });
+  </script>
+</body>
+</html>

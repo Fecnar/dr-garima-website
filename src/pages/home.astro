@@ -1,0 +1,313 @@
+---
+const title = "Personal Home - Dr. Garima";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f6fc;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .hero {
+      text-align: center;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+      color: white;
+      padding: 4rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+      animation: sparkle 2s infinite;
+    }
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    .nav-bar {
+      background: #6f42c1;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .nav-bar a {
+      color: white;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    .nav-bar a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    .logout-btn {
+      float: right;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .stat-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      border-left: 4px solid #6f42c1;
+    }
+    .birthday-card {
+      background: linear-gradient(135deg, #ffe6f0 0%, #ffd3e3 100%);
+      border-left-color: #ff6b6b;
+    }
+    .sister-card {
+      background: linear-gradient(135deg, #e6f3ff 0%, #d3e8ff 100%);
+      border-left-color: #1db954;
+    }
+    .countdown-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #6f42c1;
+      margin: 1rem 0;
+    }
+    .birthday-number {
+      color: #ff6b6b;
+    }
+    .sister-number {
+      color: #1db954;
+    }
+    .quick-access {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .access-btn {
+      padding: 2rem;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: transform 0.3s;
+    }
+    .access-btn:hover {
+      transform: translateY(-3px);
+    }
+    .birthday-btn { background: linear-gradient(135deg, #ff6b6b, #ee5a52); }
+    .wishes-btn { background: linear-gradient(135deg, #1db954, #1ed760); }
+    .memories-btn { background: linear-gradient(135deg, #ff9500, #ff8c00); }
+    .music-btn { background: linear-gradient(135deg, #6f42c1, #9852f7); }
+    .calendar-btn { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .access-denied {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="personal-content" style="display: none;">
+    <div class="container">
+      <!-- Navigation -->
+      <div class="nav-bar">
+        <a href="/">🏠 Public Home</a>
+        <a href="/home">🎂 Personal</a>
+        <a href="/articles">📚 Articles</a>
+        <a href="/profile">👩‍⚕️ LinkedIn</a>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+        <div style="clear: both;"></div>
+      </div>
+
+      <!-- Hero Section -->
+      <div class="hero">
+        <h1>🎂 Happy Birthday, Dr. Garima! 🎂</h1>
+        <p>Welcome to your special personal space</p>
+        <p id="current-user" style="opacity: 0.8; margin-top: 1rem;"></p>
+      </div>
+
+      <!-- Birthday & Sister Counters -->
+      <div class="stats-grid">
+        <div class="stat-card birthday-card">
+          <h3>🎉 Birthday Countdown</h3>
+          <div id="birthday-countdown" class="countdown-number birthday-number">Loading...</div>
+          <p id="birthday-message">Until your special day!</p>
+        </div>
+        
+        <div class="stat-card sister-card">
+          <h3>🌟 Best Older Sister Since Oct 5, 2005</h3>
+          <div id="sister-counter" class="countdown-number sister-number">Loading...</div>
+          <p id="sister-message">Days of being amazing!</p>
+        </div>
+      </div>
+
+      <!-- Quick Access Buttons -->
+      <h2 style="text-align: center; margin: 3rem 0 2rem 0;">🎊 Your Personal Features</h2>
+      <div class="quick-access">
+        <a href="/birthday" class="access-btn birthday-btn">
+          🎂<br>Birthday Hub
+        </a>
+        <a href="/wishes" class="access-btn wishes-btn">
+          💝<br>Wishes Wall
+        </a>
+        <a href="/memories" class="access-btn memories-btn">
+          📸<br>Memories Gallery
+        </a>
+        <a href="/music" class="access-btn music-btn">
+          🎵<br>Music Lounge
+        </a>
+        <a href="/calendar" class="access-btn calendar-btn">
+          📅<br>Personal Calendar
+        </a>
+      </div>
+
+      <!-- Admin Access Section -->
+      <div id="admin-access-section" style="margin-top: 3rem;">
+        <!-- This will be populated by JavaScript based on user -->
+      </div>
+    </div>
+  </div>
+
+  <div id="access-denied" class="access-denied">
+    <h2>🚫 Access Restricted</h2>
+    <p>This is a private page. Please sign in with an authorized account.</p>
+    <button onclick="redirectToHome()" style="background: #6f42c1; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem;">
+      Go to Public Home
+    </button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const allowedEmails = ['adityagaur0510@gmail.com', 'websitefordr.garima@gmail.com'];
+      const currentUser = localStorage.getItem('userEmail');
+      
+      if (currentUser && allowedEmails.includes(currentUser)) {
+        // Show personal content
+        document.getElementById('personal-content').style.display = 'block';
+        document.getElementById('access-denied').style.display = 'none';
+        document.getElementById('current-user').textContent = `Signed in as: ${currentUser}`;
+        
+        // Birthday countdown (September 13)
+        function updateBirthdayCountdown() {
+          const now = new Date();
+          const currentYear = now.getFullYear();
+          let birthday = new Date(currentYear, 8, 13); // September 13
+          
+          // If birthday has passed this year, use next year
+          if (now > birthday) {
+            birthday = new Date(currentYear + 1, 8, 13);
+          }
+          
+          const diff = birthday - now;
+          const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+          
+          const countdownEl = document.getElementById('birthday-countdown');
+          const messageEl = document.getElementById('birthday-message');
+          
+          if (days > 1) {
+            countdownEl.textContent = days;
+            messageEl.textContent = 'Days until your birthday! 🎉';
+          } else if (days === 1) {
+            countdownEl.textContent = '1';
+            messageEl.textContent = 'Day until your birthday! 🎉';
+          } else if (days === 0) {
+            countdownEl.textContent = '🎂';
+            messageEl.textContent = "IT'S YOUR BIRTHDAY! 🎉🎂🎊";
+          }
+        }
+        
+        // Sister counter (since October 5, 2005)
+        function updateSisterCounter() {
+          const startDate = new Date(2005, 9, 5); // October 5, 2005
+          const now = new Date();
+          const diff = now - startDate;
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          
+          const counterEl = document.getElementById('sister-counter');
+          const messageEl = document.getElementById('sister-message');
+          
+          // Since we're counting from 2005, days will always be positive
+          counterEl.textContent = days.toLocaleString(); // Adds commas for large numbers
+          messageEl.textContent = 'Days of being the best older sister! 🌟';
+        }
+        
+        // Update counters immediately
+        updateBirthdayCountdown();
+        updateSisterCounter();
+        
+        // Update every hour
+        setInterval(updateBirthdayCountdown, 3600000);
+        setInterval(updateSisterCounter, 3600000);
+        
+        // Add admin access buttons based on user
+        const adminSection = document.getElementById('admin-access-section');
+        
+        if (currentUser === 'adityagaur0510@gmail.com') {
+          // Master admin access
+          adminSection.innerHTML = `
+            <div style="background: rgba(255,107,107,0.1); padding: 2rem; border-radius: 12px; border: 2px solid #ff6b6b;">
+              <h3 style="text-align: center; color: #ff6b6b; margin-bottom: 1.5rem;">👑 Master Admin Access</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <a href="/admin/master" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52); color: white; padding: 1.5rem; text-align: center; text-decoration: none; border-radius: 8px; font-weight: bold;">
+                  👑<br>Master Admin
+                </a>
+                <a href="/admin/wishes" style="background: linear-gradient(135deg, #1db954, #1ed760); color: white; padding: 1.5rem; text-align: center; text-decoration: none; border-radius: 8px; font-weight: bold;">
+                  💝<br>Wishes Manager
+                </a>
+                <a href="/admin/memories" style="background: linear-gradient(135deg, #ff9500, #ff8c00); color: white; padding: 1.5rem; text-align: center; text-decoration: none; border-radius: 8px; font-weight: bold;">
+                  📸<br>Memories Manager
+                </a>
+              </div>
+            </div>
+          `;
+        } else if (currentUser === 'websitefordr.garima@gmail.com') {
+          // Dr. Garima's admin access
+          adminSection.innerHTML = `
+            <div style="background: rgba(111,66,193,0.1); padding: 2rem; border-radius: 12px; border: 2px solid #6f42c1;">
+              <h3 style="text-align: center; color: #6f42c1; margin-bottom: 1.5rem;">👩‍⚕️ Dr. Garima's Admin</h3>
+              <div style="text-align: center;">
+                <a href="/admin/articles" style="background: linear-gradient(135deg, #6f42c1, #9852f7); color: white; padding: 1.5rem 3rem; text-align: center; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
+                  📚<br>Article Manager
+                </a>
+              </div>
+            </div>
+          `;
+        }
+        
+      } else {
+        // Show access denied
+        document.getElementById('personal-content').style.display = 'none';
+        document.getElementById('access-denied').style.display = 'block';
+      }
+      
+      // Global functions
+      window.logout = function() {
+        localStorage.removeItem('userEmail');
+        window.location.href = '/';
+      }
+      
+      window.redirectToHome = function() {
+        window.location.href = '/';
+      }
+    });
+  </script>
+</body>
+</html>

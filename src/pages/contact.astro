@@ -1,0 +1,104 @@
+---
+const title = "Contact - Dr. Garima";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f6fc;
+      color: #333;
+    }
+    .nav-bar {
+      background: #6f42c1;
+      padding: 1rem;
+    }
+    .nav-bar a {
+      color: white;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .contact-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .submit-btn {
+      background: #6f42c1;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-bar">
+    <a href="/">🏠 Home</a>
+    <a href="/articles">📚 Articles</a>
+    <a href="/profile">👩‍⚕️ LinkedIn</a>
+    <a href="/physio-news">📰 News</a>
+    <a href="/contact">📞 Contact</a>
+  </div>
+
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h1>📞 Contact Dr. Garima</h1>
+      <p>Get in touch for professional inquiries and consultations</p>
+    </div>
+
+    <div class="contact-form">
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

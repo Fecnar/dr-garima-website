@@ -1,0 +1,316 @@
+---
+const title = "Birthday Wishes - Dr. Garima";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .nav-bar {
+      background: rgba(255,255,255,0.9);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .nav-bar a {
+      color: #6f42c1;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    .nav-bar a:hover {
+      background: rgba(111,66,193,0.1);
+    }
+    .logout-btn {
+      float: right;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .wishes-hero {
+      text-align: center;
+      background: rgba(255,255,255,0.9);
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .submit-section {
+      background: rgba(29,185,84,0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 3rem;
+      border: 2px solid #1db954;
+    }
+    .submit-btn {
+      background: #1db954;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(29,185,84,0.3);
+    }
+    .wishes-container {
+      background: rgba(255,255,255,0.9);
+      padding: 2rem;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+    }
+    .wish-card {
+      background: #fff;
+      border-left: 4px solid #6f42c1;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .wish-card:hover {
+      transform: translateX(5px);
+    }
+    .wish-author {
+      font-weight: bold;
+      color: #6f42c1;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .wish-message {
+      color: #555;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .wish-date {
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 0.5rem;
+    }
+    .loading {
+      text-align: center;
+      color: #6f42c1;
+      font-size: 1.1rem;
+      padding: 2rem;
+    }
+    .no-wishes {
+      text-align: center;
+      padding: 3rem;
+      color: #666;
+    }
+    .access-denied {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wishes-content" style="display: none;">
+    <div class="container">
+      <!-- Navigation -->
+      <div class="nav-bar">
+        <a href="/home">🎂 Personal Home</a>
+        <a href="/birthday">🎉 Birthday Hub</a>
+        <a href="/memories">📸 Memories</a>
+        <a href="/music">🎵 Music</a>
+        <a href="/calendar">📅 Calendar</a>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+        <div style="clear: both;"></div>
+      </div>
+
+      <!-- Hero Section -->
+      <div class="wishes-hero">
+        <h1>💝 Birthday Wishes Wall</h1>
+        <p style="font-size: 1.2rem; color: #666;">All the beautiful messages from your loved ones</p>
+      </div>
+
+      <!-- Submit New Wish Section -->
+      <div class="submit-section">
+        <h3>🌟 Want to Send a Birthday Wish?</h3>
+        <p>Friends and family can submit their heartfelt messages using our form:</p>
+        <a href="https://forms.google.com/YOUR_FORM_ID" target="_blank" class="submit-btn">
+          📝 Submit Your Wish Here
+        </a>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 1rem;">
+          <strong>Note:</strong> Wishes are reviewed before appearing here to ensure they're special and appropriate.
+        </p>
+      </div>
+
+      <!-- Wishes Display -->
+      <div class="wishes-container">
+        <h2 style="text-align: center; color: #6f42c1; margin-bottom: 2rem;">💌 Messages for You</h2>
+        <div id="wishes-list">
+          <div class="loading">
+            <p>🔄 Loading your birthday wishes...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instructions for Setup -->
+      <div style="background: rgba(255,193,7,0.1); padding: 1.5rem; border-radius: 10px; border-left: 4px solid #ffc107; margin-top: 2rem;">
+        <h4 style="color: #e65100; margin-top: 0;">🔧 Setup Instructions (Remove this after setup)</h4>
+        <ol style="color: #666;">
+          <li>Create a Google Form for birthday wishes</li>
+          <li>Link it to a Google Sheet</li>
+          <li>Replace "YOUR_FORM_ID" above with your actual form link</li>
+          <li>Replace "YOUR_SHEET_ID" in the JavaScript with your sheet ID</li>
+          <li>Set up Google Sheets API access</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div id="access-denied" class="access-denied">
+    <h2>🚫 Access Restricted</h2>
+    <p>This wishes wall is private. Please sign in with an authorized account.</p>
+    <button onclick="redirectToHome()" style="background: #6f42c1; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer;">
+      Go to Public Home
+    </button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const allowedEmails = ['adityagaur0510@gmail.com', 'websitefordr.garima@gmail.com'];
+      const currentUser = localStorage.getItem('userEmail');
+      
+      if (currentUser && allowedEmails.includes(currentUser)) {
+        document.getElementById('wishes-content').style.display = 'block';
+        document.getElementById('access-denied').style.display = 'none';
+        
+        loadWishes();
+      } else {
+        document.getElementById('wishes-content').style.display = 'none';
+        document.getElementById('access-denied').style.display = 'block';
+      }
+      
+      function loadWishes() {
+        // Google Sheets integration
+        const SHEET_ID = 'YOUR_SHEET_ID'; // Replace with your actual Google Sheet ID
+        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=ApprovedWishes`;
+        
+        // For now, show sample wishes (replace with real data later)
+        setTimeout(() => {
+          displaySampleWishes();
+        }, 1500);
+        
+        // Uncomment this when you have your Google Sheet set up:
+        /*
+        fetch(SHEET_URL)
+          .then(response => response.text())
+          .then(csv => {
+            const wishes = parseCSV(csv);
+            displayWishes(wishes);
+          })
+          .catch(error => {
+            console.error('Error loading wishes:', error);
+            displayError();
+          });
+        */
+      }
+      
+      function parseCSV(text) {
+        const lines = text.split('\n').slice(1); // Skip header
+        return lines
+          .filter(line => line.trim())
+          .map(line => {
+            const [name, message, date] = line.split(',');
+            return {
+              name: name?.replace(/"/g, '') || 'Anonymous',
+              message: message?.replace(/"/g, '') || '',
+              date: date?.replace(/"/g, '') || 'Recently'
+            };
+          });
+      }
+      
+      function displayWishes(wishes) {
+        const container = document.getElementById('wishes-list');
+        
+        if (wishes.length === 0) {
+          container.innerHTML = `
+            <div class="no-wishes">
+              <h3>🎂 No wishes yet!</h3>
+              <p>Be the first to send a birthday wish using the form above.</p>
+            </div>
+          `;
+          return;
+        }
+        
+        container.innerHTML = wishes.map(wish => `
+          <div class="wish-card">
+            <div class="wish-author">${wish.name}</div>
+            <p class="wish-message">${wish.message}</p>
+            <div class="wish-date">Sent ${wish.date}</div>
+          </div>
+        `).join('');
+      }
+      
+      function displaySampleWishes() {
+        const sampleWishes = [
+          {
+            name: "Your Best Friend",
+            message: "Happy Birthday, Dr. Garima! 🎉 You're such an amazing person and an incredible physiotherapist. Hope your special day is filled with joy, laughter, and all your favorite things!",
+            date: "2 days ago"
+          },
+          {
+            name: "Your Colleague",
+            message: "Wishing you a very happy birthday! 🎂 Your dedication to helping patients recover and your positive attitude inspire everyone around you. Have a wonderful celebration!",
+            date: "1 day ago"
+          },
+          {
+            name: "A Grateful Patient",
+            message: "Happy Birthday to the best physiotherapist ever! 🌟 Thank you for helping me get back on my feet (literally!). You're truly a healer and a wonderful person.",
+            date: "Today"
+          }
+        ];
+        
+        displayWishes(sampleWishes);
+      }
+      
+      function displayError() {
+        document.getElementById('wishes-list').innerHTML = `
+          <div style="text-align: center; padding: 2rem; color: #ff6b6b;">
+            <h3>Unable to load wishes</h3>
+            <p>Please set up your Google Sheets integration first.</p>
+          </div>
+        `;
+      }
+      
+      window.logout = function() {
+        localStorage.removeItem('userEmail');
+        window.location.href = '/';
+      }
+      
+      window.redirectToHome = function() {
+        window.location.href = '/';
+      }
+    });
+  </script>
+</body>
+</html>

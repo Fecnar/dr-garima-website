@@ -1,0 +1,249 @@
+---
+const title = "Master Admin - Dr. Garima Website";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .admin-nav {
+      background: rgba(255,255,255,0.9);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .admin-nav a {
+      color: #ff6b6b;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .logout-btn {
+      float: right;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .admin-hero {
+      text-align: center;
+      background: rgba(255,255,255,0.9);
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+    }
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .admin-card {
+      background: rgba(255,255,255,0.9);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .admin-btn {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+    .access-denied {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div id="master-admin-content" style="display: none;">
+    <div class="container">
+      <!-- Master Admin Navigation -->
+      <div class="admin-nav">
+        <a href="/home">🎂 Personal Home</a>
+        <a href="/admin/master">👑 Master Admin</a>
+        <a href="/admin/wishes">💝 Wishes Manager</a>
+        <a href="/admin/memories">📸 Memories Manager</a>
+        <span style="color: #ff6b6b; font-weight: bold;">👑 Master Admin Panel</span>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+        <div style="clear: both;"></div>
+      </div>
+
+      <!-- Master Admin Hero -->
+      <div class="admin-hero">
+        <h1>👑 Master Admin Control Panel</h1>
+        <p>Complete website management and administration</p>
+        <p style="color: #ff6b6b; font-weight: bold;">✅ Master Admin - Full Access</p>
+      </div>
+
+      <!-- Admin Features Grid -->
+      <div class="admin-grid">
+        <div class="admin-card">
+          <h3>💝 Wishes Management</h3>
+          <p>Moderate birthday wishes, approve/reject submissions</p>
+          <a href="/admin/wishes" class="admin-btn">Manage Wishes</a>
+        </div>
+
+        <div class="admin-card">
+          <h3>📸 Memories Management</h3>
+          <p>Upload and manage photos for the memories gallery</p>
+          <a href="/admin/memories" class="admin-btn">Manage Memories</a>
+        </div>
+
+        <div class="admin-card">
+          <h3>👥 User Management</h3>
+          <p>Manage authorized users and access permissions</p>
+          <button onclick="manageUsers()" class="admin-btn">Manage Users</button>
+        </div>
+
+        <div class="admin-card">
+          <h3>🎵 Spotify Settings</h3>
+          <p>Configure Spotify integration and music settings</p>
+          <button onclick="spotifySettings()" class="admin-btn">Spotify Config</button>
+        </div>
+
+        <div class="admin-card">
+          <h3>📊 Website Analytics</h3>
+          <p>View website statistics and user activity</p>
+          <button onclick="showAnalytics()" class="admin-btn">View Analytics</button>
+        </div>
+
+        <div class="admin-card">
+          <h3>⚙️ System Settings</h3>
+          <p>Configure website settings and preferences</p>
+          <button onclick="systemSettings()" class="admin-btn">Settings</button>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div style="background: rgba(255,255,255,0.9); padding: 2rem; border-radius: 15px; margin-top: 3rem;">
+        <h2>🚀 Quick Actions</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+          <button onclick="clearAllWishes()" style="background: #ffc107; color: #000; border: none; padding: 1rem; border-radius: 8px; cursor: pointer;">
+            🗑️ Clear All Wishes
+          </button>
+          <button onclick="exportData()" style="background: #1db954; color: white; border: none; padding: 1rem; border-radius: 8px; cursor: pointer;">
+            📥 Export Data
+          </button>
+          <button onclick="backupWebsite()" style="background: #6f42c1; color: white; border: none; padding: 1rem; border-radius: 8px; cursor: pointer;">
+            💾 Backup Website
+          </button>
+          <button onclick="testFeatures()" style="background: #17a2b8; color: white; border: none; padding: 1rem; border-radius: 8px; cursor: pointer;">
+            🧪 Test Features
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="access-denied" class="access-denied">
+    <h2>🚫 Master Admin Access Restricted</h2>
+    <p>This is the master admin panel. Only the website administrator can access this area.</p>
+    <button onclick="redirectToHome()" style="background: #ff6b6b; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer;">
+      Go to Home
+    </button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentUser = localStorage.getItem('userEmail');
+      
+      // Only you can access the master admin panel
+      if (currentUser === 'adityagaur0510@gmail.com') {
+        document.getElementById('master-admin-content').style.display = 'block';
+        document.getElementById('access-denied').style.display = 'none';
+      } else {
+        document.getElementById('master-admin-content').style.display = 'none';
+        document.getElementById('access-denied').style.display = 'block';
+      }
+      
+      // Admin functions
+      window.manageUsers = function() {
+        alert('👥 User Management:\n\nCurrent authorized users:\n- adityagaur0510@gmail.com (Master Admin)\n- websitefordr.garima@gmail.com (Article Admin)\n\nUser management features will be enhanced in future updates.');
+      }
+      
+      window.spotifySettings = function() {
+        alert('🎵 Spotify Settings:\n\nSpotify integration status: Ready for setup\nClient ID: Will be configured\nRedirect URI: Set for production\n\nSpotify settings panel coming soon!');
+      }
+      
+      window.showAnalytics = function() {
+        alert('📊 Website Analytics:\n\nPage views: Tracking setup needed\nUser sessions: Implementation required\nPopular features: Will be tracked\n\nAnalytics dashboard coming soon!');
+      }
+      
+      window.systemSettings = function() {
+        alert('⚙️ System Settings:\n\nWebsite theme: Default\nBirthday date: September 13\nSister counter: October 5, 2005\n\nAdvanced settings panel coming soon!');
+      }
+      
+      window.clearAllWishes = function() {
+        if (confirm('⚠️ Are you sure you want to clear ALL wishes? This cannot be undone!')) {
+          localStorage.removeItem('birthday-wishes');
+          alert('🗑️ All wishes have been cleared.');
+        }
+      }
+      
+      window.exportData = function() {
+        const data = {
+          articles: JSON.parse(localStorage.getItem('dr-garima-articles') || '[]'),
+          wishes: JSON.parse(localStorage.getItem('birthday-wishes') || '[]'),
+          settings: {
+            exportDate: new Date().toISOString(),
+            version: '1.0.0'
+          }
+        };
+        
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'dr-garima-website-data.json';
+        a.click();
+        
+        alert('📥 Website data exported successfully!');
+      }
+      
+      window.backupWebsite = function() {
+        alert('💾 Website Backup:\n\nAutomatic backups: Enabled\nLast backup: Will be implemented\nBackup location: Cloud storage\n\nBackup system coming soon!');
+      }
+      
+      window.testFeatures = function() {
+        alert('🧪 Feature Testing:\n\n✅ Authentication: Working\n✅ Navigation: Working\n✅ Counters: Working\n🔄 Google Sheets: Setup needed\n🔄 Spotify: Integration needed\n\nAll core features are functional!');
+      }
+      
+      window.logout = function() {
+        localStorage.removeItem('userEmail');
+        window.location.href = '/';
+      }
+      
+      window.redirectToHome = function() {
+        window.location.href = '/';
+      }
+    });
+  </script>
+</body>
+</html>

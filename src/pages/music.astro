@@ -1,0 +1,125 @@
+---
+const title = "Music Lounge - Dr. Garima";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .nav-bar {
+      background: rgba(255,255,255,0.9);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .nav-bar a {
+      color: #6f42c1;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .logout-btn {
+      float: right;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .music-hero {
+      text-align: center;
+      background: rgba(255,255,255,0.9);
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+    }
+    .spotify-section {
+      background: rgba(255,255,255,0.9);
+      padding: 2rem;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+    }
+    .access-denied {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div id="music-content" style="display: none;">
+    <div class="container">
+      <div class="nav-bar">
+        <a href="/home">🎂 Personal Home</a>
+        <a href="/birthday">🎉 Birthday Hub</a>
+        <a href="/wishes">💝 Wishes</a>
+        <a href="/memories">📸 Memories</a>
+        <a href="/calendar">📅 Calendar</a>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+        <div style="clear: both;"></div>
+      </div>
+
+      <div class="music-hero">
+        <h1>🎵 Your Personal Music Lounge</h1>
+        <p>Control your Spotify and enjoy your favorite tunes</p>
+      </div>
+
+      <div class="spotify-section">
+        <h3>🎧 Spotify Player</h3>
+        <div id="spotify-login-area">
+          <p>Connect to Spotify to control your music</p>
+          <button id="spotify-login-btn" style="background: #1db954; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer;">
+            Login with Spotify
+          </button>
+        </div>
+        <div id="music-controls" style="display: none;">
+          <p>Your Spotify player controls will appear here after login.</p>
+          <!-- Your existing Spotify player code will go here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="access-denied" class="access-denied">
+    <h2>🚫 Access Restricted</h2>
+    <button onclick="window.location.href='/'" style="background: #6f42c1; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer;">Go to Public Home</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const allowedEmails = ['adityagaur0510@gmail.com', 'websitefordr.garima@gmail.com'];
+      const currentUser = localStorage.getItem('userEmail');
+      
+      if (currentUser && allowedEmails.includes(currentUser)) {
+        document.getElementById('music-content').style.display = 'block';
+        document.getElementById('access-denied').style.display = 'none';
+        
+        // Your existing Spotify code will be integrated here
+        document.getElementById('spotify-login-btn').onclick = function() {
+          alert('Spotify integration will be added with your existing player code!');
+        };
+      } else {
+        document.getElementById('access-denied').style.display = 'block';
+      }
+      
+      window.logout = function() {
+        localStorage.removeItem('userEmail');
+        window.location.href = '/';
+      }
+    });
+  </script>
+</body>
+</html>

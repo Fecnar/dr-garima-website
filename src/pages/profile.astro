@@ -1,0 +1,232 @@
+---
+const title = "Dr. Garima Gaur PT - Professional Profile";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f6fc;
+      color: #333;
+    }
+    .nav-bar {
+      background: #6f42c1;
+      padding: 1rem;
+    }
+    .nav-bar a {
+      color: white;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .nav-bar a:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .profile-hero {
+      text-align: center;
+      background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
+      color: white;
+      padding: 4rem 2rem;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+    }
+    .linkedin-main {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .linkedin-btn {
+      background: #0077b5;
+      color: white;
+      padding: 1.5rem 3rem;
+      text-decoration: none;
+      border-radius: 50px;
+      display: inline-block;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin: 2rem 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,119,181,0.3);
+    }
+    .linkedin-btn:hover {
+      background: #005885;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,119,181,0.4);
+    }
+    .profile-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .feature-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border-left: 5px solid #0077b5;
+    }
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .profile-url {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border-left: 4px solid #0077b5;
+      margin: 2rem 0;
+    }
+    .cta-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4rem 2rem;
+      border-radius: 15px;
+      text-align: center;
+    }
+    .cta-buttons {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-btn {
+      padding: 1rem 2rem;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+    }
+    .btn-linkedin {
+      background: white;
+      color: #0077b5;
+    }
+    .btn-contact {
+      background: #1db954;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-bar">
+    <a href="/">🏠 Home</a>
+    <a href="/articles">📚 Articles</a>
+    <a href="/profile">👩‍⚕️ LinkedIn</a>
+    <a href="/physio-news">📰 News</a>
+    <a href="/contact">📞 Contact</a>
+  </div>
+
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="profile-hero">
+      <h1>👩‍⚕️ Dr. Garima Gaur PT</h1>
+      <p style="font-size: 1.3rem; margin: 1rem 0;">Professional Physiotherapist & Healthcare Expert</p>
+      <p style="opacity: 0.9;">Connect professionally on LinkedIn</p>
+    </div>
+
+    <!-- Main LinkedIn Section -->
+    <div class="linkedin-main">
+      <div class="feature-icon">🔗</div>
+      <h2>Professional LinkedIn Profile</h2>
+      <p style="font-size: 1.1rem; color: #666; margin: 1.5rem 0;">
+        Connect with Dr. Garima on LinkedIn to view her complete professional background, 
+        experience, qualifications, and professional network in physiotherapy.
+      </p>
+      
+      <a href="https://www.linkedin.com/in/dr-garima-gaur-pt-248a62127/" 
+         target="_blank" 
+         class="linkedin-btn">
+        📱 View LinkedIn Profile
+      </a>
+
+      <div class="profile-url">
+        <h4 style="margin: 0 0 1rem 0; color: #0077b5;">Direct Profile Link:</h4>
+        <code style="background: #e9ecef; padding: 0.8rem 1.2rem; border-radius: 6px; font-size: 0.95rem; word-break: break-all;">
+          linkedin.com/in/dr-garima-gaur-pt-248a62127/
+        </code>
+        <p style="font-size: 0.9rem; color: #666; margin: 1rem 0 0 0;">
+          Copy this link to share Dr. Garima's profile directly
+        </p>
+      </div>
+    </div>
+
+    <!-- Professional Features -->
+    <div class="profile-features">
+      <div class="feature-card">
+        <div class="feature-icon">🩺</div>
+        <h3>Clinical Expertise</h3>
+        <p>Specialized in physiotherapy with comprehensive patient care and rehabilitation techniques</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🎓</div>
+        <h3>Professional Qualifications</h3>
+        <p>Licensed physiotherapist with advanced training and certifications in the field</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Professional Network</h3>
+        <p>Connected with healthcare professionals and industry experts worldwide</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Continuous Learning</h3>
+        <p>Committed to staying updated with latest physiotherapy research and techniques</p>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="cta-section">
+      <h2>🌟 Ready to Connect Professionally?</h2>
+      <p style="font-size: 1.2rem; margin: 1.5rem 0;">
+        Whether you're a healthcare professional, patient, or looking for physiotherapy expertise, 
+        Dr. Garima is always open to meaningful professional connections.
+      </p>
+      
+      <div class="cta-buttons">
+        <a href="https://www.linkedin.com/in/dr-garima-gaur-pt-248a62127/" 
+           target="_blank"
+           class="cta-btn btn-linkedin">
+          🔗 Connect on LinkedIn
+        </a>
+        <a href="/contact" class="cta-btn btn-contact">
+          📞 Professional Inquiry
+        </a>
+        <a href="/articles" class="cta-btn" style="background: #ff9500; color: white;">
+          📚 Read Publications
+        </a>
+      </div>
+    </div>
+
+    <!-- Why LinkedIn Note -->
+    <div style="background: rgba(255,193,7,0.1); padding: 2rem; border-radius: 12px; border-left: 4px solid #ffc107; margin-top: 3rem;">
+      <h4 style="color: #e65100; margin-top: 0;">ℹ️ About LinkedIn Integration</h4>
+      <p style="color: #666; margin-bottom: 0;">
+        LinkedIn profiles cannot be directly embedded on external websites due to privacy and security policies. 
+        Click the LinkedIn button above to view Dr. Garima's complete professional profile directly on LinkedIn's secure platform.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

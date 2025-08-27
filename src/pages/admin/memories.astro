@@ -1,0 +1,113 @@
+---
+const title = "Memories Manager - Admin";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #ff9500 0%, #ff8c00 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .admin-nav {
+      background: rgba(255,255,255,0.9);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .admin-nav a {
+      color: #ff9500;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .logout-btn {
+      float: right;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .admin-hero {
+      text-align: center;
+      background: rgba(255,255,255,0.9);
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+    }
+    .admin-section {
+      background: rgba(255,255,255,0.9);
+      padding: 2rem;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+    }
+    .access-denied {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div id="memories-admin-content" style="display: none;">
+    <div class="container">
+      <div class="admin-nav">
+        <a href="/home">🎂 Personal Home</a>
+        <a href="/admin/master">👑 Master Admin</a>
+        <a href="/admin/memories">📸 Memories Manager</a>
+        <span style="color: #ff9500; font-weight: bold;">📸 Memories Management</span>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+        <div style="clear: both;"></div>
+      </div>
+
+      <div class="admin-hero">
+        <h1>📸 Memories Gallery Management</h1>
+        <p>Upload and manage photos for the memories gallery</p>
+      </div>
+
+      <div class="admin-section">
+        <h2>📤 Upload New Memories</h2>
+        <p>Cloud storage integration and photo management features will be implemented here.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="access-denied" class="access-denied">
+    <h2>🚫 Admin Access Required</h2>
+    <button onclick="window.location.href='/'" style="background: #ff9500; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer;">Go to Home</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentUser = localStorage.getItem('userEmail');
+      
+      if (currentUser === 'adityagaur0510@gmail.com') {
+        document.getElementById('memories-admin-content').style.display = 'block';
+        document.getElementById('access-denied').style.display = 'none';
+      } else {
+        document.getElementById('access-denied').style.display = 'block';
+      }
+      
+      window.logout = function() {
+        localStorage.removeItem('userEmail');
+        window.location.href = '/';
+      }
+    });
+  </script>
+</body>
+</html>

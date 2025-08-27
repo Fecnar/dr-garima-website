@@ -1,0 +1,117 @@
+---
+const title = "Personal Calendar - Dr. Garima";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .nav-bar {
+      background: rgba(255,255,255,0.9);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .nav-bar a {
+      color: #6f42c1;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .logout-btn {
+      float: right;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .calendar-hero {
+      text-align: center;
+      background: rgba(255,255,255,0.9);
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+    }
+    .calendar-container {
+      background: rgba(255,255,255,0.9);
+      padding: 1rem;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+    }
+    .access-denied {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div id="calendar-content" style="display: none;">
+    <div class="container">
+      <div class="nav-bar">
+        <a href="/home">🎂 Personal Home</a>
+        <a href="/birthday">🎉 Birthday Hub</a>
+        <a href="/wishes">💝 Wishes</a>
+        <a href="/memories">📸 Memories</a>
+        <a href="/music">🎵 Music</a>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+        <div style="clear: both;"></div>
+      </div>
+
+      <div class="calendar-hero">
+        <h1>📅 Your Personal Calendar</h1>
+        <p>Plan your schedule, events, and special moments</p>
+      </div>
+
+      <div class="calendar-container">
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=Asia%2FKolkata"
+          style="width: 100%; height: 70vh; border: none; border-radius: 10px;"
+          title="Personal Calendar"
+        ></iframe>
+        <p style="text-align: center; color: #666; margin-top: 1rem;">
+          <strong>Note:</strong> Replace YOUR_CALENDAR_ID with your actual Google Calendar ID
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="access-denied" class="access-denied">
+    <h2>🚫 Access Restricted</h2>
+    <button onclick="window.location.href='/'" style="background: #6f42c1; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer;">Go to Public Home</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const allowedEmails = ['adityagaur0510@gmail.com', 'websitefordr.garima@gmail.com'];
+      const currentUser = localStorage.getItem('userEmail');
+      
+      if (currentUser && allowedEmails.includes(currentUser)) {
+        document.getElementById('calendar-content').style.display = 'block';
+        document.getElementById('access-denied').style.display = 'none';
+      } else {
+        document.getElementById('access-denied').style.display = 'block';
+      }
+      
+      window.logout = function() {
+        localStorage.removeItem('userEmail');
+        window.location.href = '/';
+      }
+    });
+  </script>
+</body>
+</html>

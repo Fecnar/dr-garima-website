@@ -1,0 +1,144 @@
+---
+const title = "Published Articles - Dr. Garima";
+
+// Sample articles - replace with database later
+const articles = [
+  {
+    title: "Modern Knee Rehabilitation Techniques",
+    date: "August 15, 2025",
+    summary: "Latest advances in post-surgical knee recovery protocols",
+    link: "#",
+    category: "Orthopedic"
+  },
+  {
+    title: "Shoulder Recovery After Surgery",
+    date: "July 20, 2025", 
+    summary: "Comprehensive guide to shoulder physiotherapy",
+    link: "#",
+    category: "Sports Medicine"
+  },
+  {
+    title: "Sports Injury Prevention Strategies",
+    date: "June 10, 2025",
+    summary: "Evidence-based approaches to preventing athletic injuries",
+    link: "#",
+    category: "Prevention"
+  }
+];
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f6fc;
+      color: #333;
+    }
+    .nav-bar {
+      background: #6f42c1;
+      padding: 1rem;
+    }
+    .nav-bar a {
+      color: white;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .nav-bar a:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .page-hero {
+      text-align: center;
+      background: white;
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .articles-grid {
+      display: grid;
+      gap: 2rem;
+    }
+    .article-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border-left: 4px solid #6f42c1;
+    }
+    .article-category {
+      background: #6f42c1;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .article-title {
+      color: #6f42c1;
+      font-size: 1.4rem;
+      margin: 0.5rem 0;
+    }
+    .article-date {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    .article-summary {
+      color: #555;
+      line-height: 1.6;
+      margin: 1rem 0;
+    }
+    .read-more {
+      color: #6f42c1;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-bar">
+    <a href="/">🏠 Home</a>
+    <a href="/articles">📚 Articles</a>
+    <a href="/profile">👩‍⚕️ LinkedIn</a>
+    <a href="/physio-news">📰 News</a>
+    <a href="/contact">📞 Contact</a>
+  </div>
+
+  <div class="container">
+    <div class="page-hero">
+      <h1>📚 Published Articles</h1>
+      <p>Research, insights, and clinical expertise in physiotherapy</p>
+    </div>
+
+    <div class="articles-grid">
+      {articles.map(article => (
+        <div class="article-card">
+          <div class="article-category">{article.category}</div>
+          <h2 class="article-title">{article.title}</h2>
+          <div class="article-date">{article.date}</div>
+          <p class="article-summary">{article.summary}</p>
+          <a href={article.link} class="read-more">Read Full Article →</a>
+        </div>
+      ))}
+    </div>
+
+    <div style="background: #e6f3ff; padding: 2rem; border-radius: 12px; margin-top: 3rem; text-align: center;">
+      <h3>📝 Submit Your Research</h3>
+      <p>Have a physiotherapy article or research to share? Get in touch!</p>
+      <a href="/contact" style="background: #6f42c1; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px;">Contact Dr. Garima</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+---
+const title = "Dr. Garima - Physiotherapy Expert";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f6fc;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .hero {
+      text-align: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card h3 {
+      color: #6f42c1;
+      margin-bottom: 1rem;
+    }
+    .card a {
+      color: #6f42c1;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .auth-section {
+      text-align: center;
+      padding: 2rem;
+      background: #e6f3ff;
+      border-radius: 12px;
+    }
+    .btn {
+      background: #6f42c1;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>🩺 Welcome to Dr. Garima's Practice</h1>
+      <p>Expert Physiotherapy Care for Your Health & Wellness</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>📚 Published Articles</h3>
+        <p>Read the latest research and publications</p>
+        <a href="/articles">View Articles →</a>
+      </div>
+
+      <div class="card">
+        <h3>👩‍⚕️ Professional Profile</h3>
+        <p>Learn about qualifications and expertise</p>
+        <a href="/profile">View LinkedIn →</a>
+      </div>
+
+      <div class="card">
+        <h3>📰 Physiotherapy News</h3>
+        <p>Stay updated with latest advances</p>
+        <a href="/physio-news">Read News →</a>
+      </div>
+
+      <div class="card">
+        <h3>📞 Contact</h3>
+        <p>Get in touch for inquiries</p>
+        <a href="/contact">Contact Us →</a>
+      </div>
+    </div>
+
+    <div class="auth-section">
+      <h3>🎉 Personal Access</h3>
+      <p>Authorized users can access birthday celebrations and personal content</p>
+      <button onclick="showLogin()" class="btn">
+        Sign In for Personal Access
+      </button>
+      <div id="user-status" style="margin-top: 1rem;"></div>
+    </div>
+
+    <!-- Admin Quick Access -->
+    <div id="admin-quick-access" style="display: none; background: #ffe6e6; padding: 2rem; border-radius: 12px; margin-top: 2rem; border: 2px solid #ff6b6b;">
+      <h3 style="text-align: center; color: #ff6b6b;">🔧 Admin Quick Access</h3>
+      <div id="admin-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if user is already logged in
+      const allowedEmails = ['adityagaur0510@gmail.com', 'websitefordr.garima@gmail.com'];
+      const currentUser = localStorage.getItem('userEmail');
+      
+      function updateUserStatus() {
+        const statusDiv = document.getElementById('user-status');
+        const adminAccess = document.getElementById('admin-quick-access');
+        const adminButtons = document.getElementById('admin-buttons');
+        
+        if (currentUser && allowedEmails.includes(currentUser)) {
+          statusDiv.innerHTML = `
+            <p style="color: #1db954; font-weight: bold;">✅ Signed in as: ${currentUser}</p>
+            <a href="/home" style="background: #1db954; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; margin-right: 1rem;">Go to Personal Home</a>
+            <button onclick="logout()" style="background: #ff6b6b; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">Logout</button>
+          `;
+          
+          // Show admin access based on user
+          if (currentUser === 'adityagaur0510@gmail.com') {
+            adminAccess.style.display = 'block';
+            adminButtons.innerHTML = `
+              <a href="/admin/master" style="background: #ff6b6b; color: white; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 6px; font-weight: bold;">👑 Master Admin</a>
+              <a href="/admin/wishes" style="background: #1db954; color: white; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 6px; font-weight: bold;">💝 Wishes</a>
+            `;
+          } else if (currentUser === 'websitefordr.garima@gmail.com') {
+            adminAccess.style.display = 'block';
+            adminButtons.innerHTML = `
+              <a href="/admin/articles" style="background: #6f42c1; color: white; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 6px; font-weight: bold;">📚 Article Manager</a>
+            `;
+          }
+        } else {
+          adminAccess.style.display = 'none';
+        }
+      }
+      
+      // Make functions global so they can be called from onclick
+      window.showLogin = function() {
+        const email = prompt('Enter your email:');
+        if (allowedEmails.includes(email)) {
+          localStorage.setItem('userEmail', email);
+          alert('✅ Welcome! You now have access to personal pages

@@ -1,0 +1,317 @@
+---
+const title = "Birthday Hub - Dr. Garima";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .nav-bar {
+      background: rgba(255,255,255,0.9);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+    .nav-bar a {
+      color: #6f42c1;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    .nav-bar a:hover {
+      background: rgba(111,66,193,0.1);
+    }
+    .logout-btn {
+      float: right;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .celebration-hero {
+      text-align: center;
+      background: rgba(255,255,255,0.95);
+      padding: 4rem 2rem;
+      border-radius: 20px;
+      margin-bottom: 3rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .celebration-hero::before {
+      content: '🎉';
+      position: absolute;
+      font-size: 3rem;
+      animation: float 3s ease-in-out infinite;
+      top: 20px;
+      left: 20px;
+    }
+    .celebration-hero::after {
+      content: '🎂';
+      position: absolute;
+      font-size: 3rem;
+      animation: float 3s ease-in-out infinite reverse;
+      top: 20px;
+      right: 20px;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    .birthday-title {
+      font-size: 3rem;
+      background: linear-gradient(45deg, #ff6b6b, #6f42c1, #1db954);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+      animation: rainbow 3s ease-in-out infinite;
+    }
+    @keyframes rainbow {
+      0%, 100% { filter: hue-rotate(0deg); }
+      50% { filter: hue-rotate(180deg); }
+    }
+    .birthday-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .birthday-card {
+      background: rgba(255,255,255,0.9);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .birthday-card:hover {
+      transform: translateY(-5px);
+    }
+    .countdown-display {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #ff6b6b;
+      margin: 1rem 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .birthday-message {
+      font-size: 1.2rem;
+      color: #6f42c1;
+      margin: 1rem 0;
+    }
+    .confetti {
+      position: fixed;
+      top: -10px;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .memory-showcase {
+      background: rgba(255,255,255,0.9);
+      padding: 2rem;
+      border-radius: 15px;
+      margin: 2rem 0;
+    }
+    .access-denied {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div id="birthday-content" style="display: none;">
+    <div class="container">
+      <!-- Navigation -->
+      <div class="nav-bar">
+        <a href="/home">🎂 Personal Home</a>
+        <a href="/wishes">💝 Wishes</a>
+        <a href="/memories">📸 Memories</a>
+        <a href="/music">🎵 Music</a>
+        <a href="/calendar">📅 Calendar</a>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+        <div style="clear: both;"></div>
+      </div>
+
+      <!-- Birthday Hero -->
+      <div class="celebration-hero">
+        <h1 class="birthday-title">Happy Birthday, Dr. Garima!</h1>
+        <p style="font-size: 1.3rem; color: #666; margin: 1rem 0;">Your special day celebration center</p>
+        <div id="birthday-status" style="margin-top: 2rem;"></div>
+      </div>
+
+      <!-- Birthday Information Grid -->
+      <div class="birthday-grid">
+        <div class="birthday-card">
+          <h3>🎂 Birthday Countdown</h3>
+          <div id="days-left" class="countdown-display">Loading...</div>
+          <div id="countdown-message" class="birthday-message">Until your special day!</div>
+        </div>
+
+        <div class="birthday-card">
+          <h3>🎉 This Year's Birthday</h3>
+          <div style="font-size: 2rem; margin: 1rem 0;">September 13th</div>
+          <p style="color: #666;">Mark your calendar for the celebration!</p>
+        </div>
+
+        <div class="birthday-card">
+          <h3>🌟 Birthday Wishes</h3>
+          <div id="wishes-count" style="font-size: 2rem; color: #1db954; margin: 1rem 0;">Loading...</div>
+          <a href="/wishes" style="color: #1db954; text-decoration: none; font-weight: bold;">View All Wishes →</a>
+        </div>
+      </div>
+
+      <!-- Special Birthday Features -->
+      <div class="memory-showcase">
+        <h2 style="text-align: center; color: #6f42c1;">🎊 Birthday Special Features</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+          <a href="/memories" style="background: linear-gradient(135deg, #ff9500, #ff8c00); color: white; padding: 1.5rem; text-align: center; text-decoration: none; border-radius: 10px;">
+            📸<br>Birthday Memories
+          </a>
+          <a href="/music" style="background: linear-gradient(135deg, #6f42c1, #9852f7); color: white; padding: 1.5rem; text-align: center; text-decoration: none; border-radius: 10px;">
+            🎵<br>Birthday Playlist
+          </a>
+          <button onclick="createConfetti()" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52); color: white; border: none; padding: 1.5rem; text-align: center; border-radius: 10px; cursor: pointer;">
+            🎉<br>Celebrate!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="access-denied" class="access-denied">
+    <h2>🚫 Access Restricted</h2>
+    <p>This birthday celebration is private. Please sign in with an authorized account.</p>
+    <button onclick="redirectToHome()" style="background: #6f42c1; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer;">
+      Go to Public Home
+    </button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const allowedEmails = ['adityagaur0510@gmail.com', 'websitefordr.garima@gmail.com'];
+      const currentUser = localStorage.getItem('userEmail');
+      
+      if (currentUser && allowedEmails.includes(currentUser)) {
+        document.getElementById('birthday-content').style.display = 'block';
+        document.getElementById('access-denied').style.display = 'none';
+        
+        // Birthday countdown
+        function updateBirthdayCountdown() {
+          const now = new Date();
+          const currentYear = now.getFullYear();
+          let birthday = new Date(currentYear, 8, 13); // September 13
+          
+          if (now > birthday) {
+            birthday = new Date(currentYear + 1, 8, 13);
+          }
+          
+          const diff = birthday - now;
+          const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+          
+          const daysEl = document.getElementById('days-left');
+          const messageEl = document.getElementById('countdown-message');
+          const statusEl = document.getElementById('birthday-status');
+          
+          if (days > 1) {
+            daysEl.textContent = days;
+            messageEl.textContent = 'Days until your birthday! 🎉';
+            statusEl.innerHTML = '<p style="font-size: 1.1rem; color: #6f42c1;">Get ready for an amazing celebration!</p>';
+          } else if (days === 1) {
+            daysEl.textContent = '1';
+            messageEl.textContent = 'Day until your birthday! 🎉';
+            statusEl.innerHTML = '<p style="font-size: 1.1rem; color: #ff6b6b; font-weight: bold;">Tomorrow is the big day! 🎂</p>';
+          } else if (days === 0) {
+            daysEl.textContent = '🎂';
+            messageEl.textContent = "IT'S YOUR BIRTHDAY TODAY! 🎊";
+            statusEl.innerHTML = '<p style="font-size: 1.3rem; color: #ff6b6b; font-weight: bold; animation: pulse 1s infinite;">🎉 HAPPY BIRTHDAY! 🎉</p>';
+            createConfetti();
+          }
+        }
+        
+        // Mock wishes count (will be replaced with real data later)
+        function updateWishesCount() {
+          // This will be replaced with actual Google Sheets data
+          const mockCount = Math.floor(Math.random() * 20) + 5;
+          document.getElementById('wishes-count').textContent = mockCount + '+';
+        }
+        
+        // Confetti animation
+        window.createConfetti = function() {
+          const colors = ['#ff6b6b', '#6f42c1', '#1db954', '#ff9500', '#667eea'];
+          
+          for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+              const confetti = document.createElement('div');
+              confetti.className = 'confetti';
+              confetti.style.left = Math.random() * 100 + 'vw';
+              confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+              confetti.style.width = confetti.style.height = Math.random() * 10 + 5 + 'px';
+              confetti.style.borderRadius = '50%';
+              confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+              
+              document.body.appendChild(confetti);
+              
+              setTimeout(() => {
+                confetti.remove();
+              }, 5000);
+            }, i * 50);
+          }
+        };
+        
+        // Add fall animation
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes fall {
+            to {
+              transform: translateY(100vh) rotate(360deg);
+            }
+          }
+          @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+          }
+        `;
+        document.head.appendChild(style);
+        
+        updateBirthdayCountdown();
+        updateWishesCount();
+        setInterval(updateBirthdayCountdown, 3600000);
+        
+      } else {
+        document.getElementById('birthday-content').style.display = 'none';
+        document.getElementById('access-denied').style.display = 'block';
+      }
+      
+      window.logout = function() {
+        localStorage.removeItem('userEmail');
+        window.location.href = '/';
+      }
+      
+      window.redirectToHome = function() {
+        window.location.href = '/';
+      }
+    });
+  </script>
+</body>
+</html>
