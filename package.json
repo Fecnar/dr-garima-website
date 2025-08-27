@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.13.3"
+    "astro": "^5.13.3",
+    "googleapis": "^158.0.0"
   }
 }
